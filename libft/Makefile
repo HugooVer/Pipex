@@ -82,8 +82,7 @@ SRCS_PATH += srcs/libft/
 SRCS_PATH += srcs/ft_printf/
 SRCS_PATH += srcs/get_next_line/
 
-INCLUDE = includes
-
+INCLUDE = -I includes
 
 vpath %.c ${SRCS_PATH}
 
@@ -97,9 +96,9 @@ ${NAME}: ${OBJS}
 
 all: ${NAME}
 
-${OBJS_PATH}/%.o: %.c
+${OBJS}: ${OBJS_PATH}/%.o: %.c ${HEADERS}
 	mkdir -p ${OBJS_PATH}
-	${CC} ${CFLAGS} -c $^ -o $@ -I ${INCLUDE}
+	${CC} ${CFLAGS} -c $^ -o $@ ${INCLUDE}
 
 clean:
 	${RM} -r ${OBJS_PATH}

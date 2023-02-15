@@ -12,8 +12,12 @@ SRCS_PATH = srcs/
 LIBFT_PATH = libft
 LIBFT = ${LIBFT_PATH}/libft.a
 
-INCLUDE = -I includes
+INCLUDE = includes/
 LIBFT_INCUDE = -I ${LIBFT_PATH}/includes
+
+HEADERS = pipex.h
+
+vpath %.h ${INCLUDE}
 
 vpath %.c ${SRCS_PATH}
 
@@ -23,14 +27,14 @@ OBJS = ${patsubst %.c, ${OBJS_PATH}/%.o, ${SRCS}}
 all: ${LIBFT} ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME} ${INCLUDE} ${LIBFT_INCUDE} ${LIBFT}
-
-${OBJS_PATH}/%.o: %.c
-	mkdir -p ${OBJS_PATH}
-	${CC} ${CFLAGS} -c $^ -o $@ ${INCLUDE} ${LIBFT_INCUDE}
+	${CC} ${CFLAGS} ${OBJS} -o ${NAME} -I ${INCLUDE} ${LIBFT_INCUDE} ${LIBFT}
 
 ${LIBFT}:
 	${MAKE} -C ${LIBFT_PATH}
+
+${OBJS}: ${OBJS_PATH}/%.o: %.c ${HEADERS} Makefile
+	mkdir -p ${OBJS_PATH}
+	${CC} ${CFLAGS} -c $< -o $@ -I ${INCLUDE} ${LIBFT_INCUDE}
 
 clean:
 	${RM} -r ${OBJS_PATH}

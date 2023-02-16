@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:02:37 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/16 17:14:04 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:48:53 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ char	*envp_finder(char **envp, char *flag)
 	while (*envp != NULL)
 	{
 		if (ft_strncmp(*envp, flag, ft_strlen(flag)) == 0)
-			return (*envp);
+			return (ft_substr(*envp, ft_strlen(flag), ft_strlen(*envp)));
 		++envp;
 	}
 	return (NULL);
 }
+

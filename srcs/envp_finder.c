@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   envp_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/16 17:06:18 by hvercell         ###   ########.fr       */
+/*   Created: 2023/02/16 17:02:37 by hvercell          #+#    #+#             */
+/*   Updated: 2023/02/16 17:14:04 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
-
-char	*access_check(char *path, char *cmd, int amode);
-char	*envp_finder(char **envp, char *flag);
-
-#endif
+char	*envp_finder(char **envp, char *flag)
+{
+	while (*envp != NULL)
+	{
+		if (ft_strncmp(*envp, flag, ft_strlen(flag)) == 0)
+			return (*envp);
+		++envp;
+	}
+	return (NULL);
+}

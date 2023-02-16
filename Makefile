@@ -6,7 +6,7 @@ CFLAGS += -Werror
 CFLAGS += -Werror
 
 SRCS += main.c
-SRCS += test.c
+SRCS += access_check.c
 
 SRCS_PATH = srcs/
 

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   access_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/16 16:18:59 by hvercell         ###   ########.fr       */
+/*   Created: 2023/02/16 15:29:57 by hvercell          #+#    #+#             */
+/*   Updated: 2023/02/16 16:21:24 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
+char	*access_check(char *path, char *cmd, int amode)
+{
+	char	**one_path;
 
-char	*access_check(char *path, char *cmd, int amode);
-
-#endif
+	one_path = ft_split(path, ':');
+	while (one_path != NULL)
+	{
+		if (access(ft_strjoin(ft_strjoin(*one_path, "/"), cmd), amode) == 0)
+			return (ft_strjoin(ft_strjoin(*one_path, "/"), cmd));
+		++one_path;
+	}
+	return ("Error");
+}

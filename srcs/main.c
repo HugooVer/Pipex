@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/15 23:10:09 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:16:11 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
-	char cmd[] = "/usr/bin/ls";
-	char *argVec[] = {"ls", "-l", "-a", NULL};
-	char *envVec[] = {NULL};
+	char cmd[] = "/usr/bin/";
 
+	if (argc == 1)
+	{
+		ft_printf("at least one argument ! \n");
+		return (0);
+	}
 	ft_printf("exvece call %s:\n", cmd);
-	ft_printf("==============================================================================\n");
-	if (execve(cmd, argVec, envVec) == -1)
+	ft_printf("=============================================================\n");
+	if (execve(ft_strjoin(cmd, argv[1]), argv + 1, envp) == -1)
 		perror("execve");
-	
-	return(0);
+	return (0);
 }
 
 

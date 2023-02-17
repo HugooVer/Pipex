@@ -2,7 +2,7 @@ NAME = pipex
 
 CC = cc
 CFLAGS += -Wall
-CFLAGS += -Werror
+CFLAGS += -Wextra
 CFLAGS += -Werror
 
 SRCS += main.c

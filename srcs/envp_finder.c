@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:02:37 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/16 18:48:53 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:50:49 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ char	*envp_finder(char **envp, char *flag)
 	}
 	return (NULL);
 }
-

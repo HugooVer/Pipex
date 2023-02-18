@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/18 20:48:46 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:52:03 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ int	main(int argc, char *argv[], char *envp[])
 	int		j;
 
 	if (argc == 1)
-		return (ft_printf("At least one argument\n"), 0);
+		return (ft_printf("At least one argument\n"), 1);
 
 	path = envp_finder(envp, "PATH=");
 
 	if (path == NULL)
-		return (ft_printf("Env Error\n"), 0);
+		return (ft_printf("Env Error\n"), 2);
 
 	i = 0;
 	while (i < (argc - 2))
 	{
 		if (pipe(pipes[i]) == -1)
-			return (1);
+			return (3);
 		++i;
 	}
 	i = 0;
@@ -42,7 +42,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		pids[i] = fork();
 		if (pids[i] == -1)
-			return (2);
+			return (4);
 		if (pids[i] == 0)
 		{
 			j = 0;
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[], char *envp[])
 			cmd = access_check(path, *pars, R_OK);
 
 			if (cmd == NULL)
-				return (ft_printf("Path for command not found\n"), 0);
+				return (ft_printf("Path for command not found\n"), 5);
 
 			if (execve(cmd, pars, envp) == -1)
 				perror("execve");

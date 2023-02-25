@@ -1,5 +1,8 @@
 pipex
+infile
+outfile
 .vscode
+test.test
 # Prerequisites
 *.d
 

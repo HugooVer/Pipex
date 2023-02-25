@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/18 20:52:03 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:04:28 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return (ft_printf("Env Error\n"), 2);
 
 	i = 0;
-	while (i < (argc - 2))
+	while (i <= (argc - 2))
 	{
 		if (pipe(pipes[i]) == -1)
 			return (3);
@@ -49,9 +49,9 @@ int	main(int argc, char *argv[], char *envp[])
 			while (j < (argc - 2))
 			{
 				if (j != i)
-					close(pipes[j][0]);
+					close(pipes[j][READ_END]);
 				else if (j != i + 1)
-					close(pipes[j][1]);
+					close(pipes[j][WRITE_END]);
 				++j;
 			}
 
@@ -61,10 +61,13 @@ int	main(int argc, char *argv[], char *envp[])
 			if (cmd == NULL)
 				return (ft_printf("Path for command not found\n"), 5);
 
+			dup2(pipes[i][WRITE_END], STDOUT_FILENO);
+			dup2(pipes[i - 1][READ_END], STDIN_FILENO);
+
 			if (execve(cmd, pars, envp) == -1)
 				perror("execve");
-			close(pipes[i][0]);
-			close(pipes[i + 1][1]);
+			close(pipes[i][READ_END]);
+			close(pipes[i + 1][WRITE_END]);
 			return (0);
 		}
 		++i;
@@ -72,8 +75,8 @@ int	main(int argc, char *argv[], char *envp[])
 	j = 0;
 	while (j < (argc - 2))
 	{
-		close(pipes[j][0]);
-		close(pipes[j][1]);
+		close(pipes[j][READ_END]);
+		close(pipes[j][WRITE_END]);
 		++j;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/25 21:04:28 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:50:32 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*cmd;
 	char	*path;
 	char	**pars;
-	int		pids[argc - 1];
+	pid_t	pids[argc - 1];
 	int		pipes[argc - 2][2];
 	int		i;
 	int		j;
+	int		fd;
 
 	if (argc == 1)
 		return (ft_printf("At least one argument\n"), 1);
@@ -60,24 +61,41 @@ int	main(int argc, char *argv[], char *envp[])
 
 			if (cmd == NULL)
 				return (ft_printf("Path for command not found\n"), 5);
-
-			dup2(pipes[i][WRITE_END], STDOUT_FILENO);
-			dup2(pipes[i - 1][READ_END], STDIN_FILENO);
+			if (i == 0)
+			{
+				printf("---------i == 0--------\n");
+				fd = open("infile", O_RDONLY, 774);
+				dup2(fd, STDIN_FILENO);
+			}
+			else if(i == (argc - 2))
+			{
+				printf("--------i == end--------\n");
+				fd = open("outfile", O_WRONLY | O_CREAT | O_TRUNC, 774);
+				dup2(fd, STDOUT_FILENO);
+			}
+			else
+			{
+				printf("----------rest----------\n");
+				dup2(pipes[i][WRITE_END], STDOUT_FILENO);
+				dup2(pipes[i - 1][READ_END], STDIN_FILENO);
+			}
 
 			if (execve(cmd, pars, envp) == -1)
 				perror("execve");
 			close(pipes[i][READ_END]);
 			close(pipes[i + 1][WRITE_END]);
+			if (i == 0 || i == (argc - 2))
+				close(fd);
 			return (0);
 		}
 		++i;
 	}
-	j = 0;
-	while (j < (argc - 2))
+	i = 0;
+	while (i < (argc - 2))
 	{
-		close(pipes[j][READ_END]);
-		close(pipes[j][WRITE_END]);
-		++j;
+		close(pipes[i][READ_END]);
+		close(pipes[i][WRITE_END]);
+		++i;
 	}
 	i = 0;
 	while (i < (argc - 1))

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/26 18:50:32 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:57:04 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	main(int argc, char *argv[], char *envp[])
 			while (j < (argc - 2))
 			{
 				if (j != i)
-					close(pipes[j][READ_END]);
-				else if (j != i + 1)
 					close(pipes[j][WRITE_END]);
+				else if (j != i + 1)
+					close(pipes[j][READ_END]);
 				++j;
 			}
 
@@ -66,12 +66,14 @@ int	main(int argc, char *argv[], char *envp[])
 				printf("---------i == 0--------\n");
 				fd = open("infile", O_RDONLY, 774);
 				dup2(fd, STDIN_FILENO);
+				dup2(pipes[i][WRITE_END], STDOUT_FILENO);
 			}
 			else if(i == (argc - 2))
 			{
 				printf("--------i == end--------\n");
 				fd = open("outfile", O_WRONLY | O_CREAT | O_TRUNC, 774);
 				dup2(fd, STDOUT_FILENO);
+				dup2(pipes[i - 1][READ_END], STDIN_FILENO);
 			}
 			else
 			{
@@ -79,7 +81,7 @@ int	main(int argc, char *argv[], char *envp[])
 				dup2(pipes[i][WRITE_END], STDOUT_FILENO);
 				dup2(pipes[i - 1][READ_END], STDIN_FILENO);
 			}
-
+			
 			if (execve(cmd, pars, envp) == -1)
 				perror("execve");
 			close(pipes[i][READ_END]);

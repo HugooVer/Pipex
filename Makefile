@@ -8,6 +8,7 @@ CFLAGS += -Werror
 SRCS += main.c
 SRCS += access_check.c
 SRCS += envp_finder.c
+SRCS += arguments_check.c
 
 SRCS_PATH = srcs/
 

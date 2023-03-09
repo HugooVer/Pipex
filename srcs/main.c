@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/08 17:52:38 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:06:42 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*cmd;
 	char	*path;
 	char	**pars;
+	
+	char	*cmd;
 	pid_t	pids[argc - 1];
 	int		pipes[argc - 2][2];
+	int		fd;
+	
 	int		i;
 	int		j;
-	int		fd;
+	
 
-	if (argc == 1)
-		return (ft_printf("At least one argument\n"), 1);
+	if (argument_number(argc) == 1)
+		return(1);
 
 	path = envp_finder(envp, "PATH=");
-
 	if (path == NULL)
 		return (ft_printf("Env Error\n"), 2);
 

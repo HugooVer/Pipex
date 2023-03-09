@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/06 16:57:04 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:52:38 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char *argv[], char *envp[])
 		pids[i] = fork();
 		if (pids[i] == -1)
 			return (4);
+		// printf("\t%i\t%i\n", pids[i], getppid());
 		if (pids[i] == 0)
 		{
 			j = 0;
@@ -63,21 +64,21 @@ int	main(int argc, char *argv[], char *envp[])
 				return (ft_printf("Path for command not found\n"), 5);
 			if (i == 0)
 			{
-				printf("---------i == 0--------\n");
+				// printf("---------i == 0--------\n");
 				fd = open("infile", O_RDONLY, 774);
 				dup2(fd, STDIN_FILENO);
 				dup2(pipes[i][WRITE_END], STDOUT_FILENO);
 			}
 			else if(i == (argc - 2))
 			{
-				printf("--------i == end--------\n");
+				// printf("--------i == end--------\n");
 				fd = open("outfile", O_WRONLY | O_CREAT | O_TRUNC, 774);
 				dup2(fd, STDOUT_FILENO);
 				dup2(pipes[i - 1][READ_END], STDIN_FILENO);
 			}
 			else
 			{
-				printf("----------rest----------\n");
+				// printf("----------rest----------\n");
 				dup2(pipes[i][WRITE_END], STDOUT_FILENO);
 				dup2(pipes[i - 1][READ_END], STDIN_FILENO);
 			}

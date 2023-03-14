@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/09 18:06:42 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:40:03 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@ int	main(int argc, char *argv[], char *envp[])
 	char	**pars;
 	
 	char	*cmd;
-	pid_t	pids[argc - 1];
-	int		pipes[argc - 2][2];
+	pid_t	*pids;
+	int		**pipes;
 	int		fd;
-	
+	int		cmd_nb;
+
 	int		i;
 	int		j;
-	
 
+	cmd_nb = argc-1;
+	pids = malloc((cmd_nb + 1)* sizeof(pid_t));
+	pipes = malloc(cmd_nb * sizeof(int));
+	i = 0;
+	while(i <= cmd_nb - 1)
+	{
+		pipes[i] = malloc(3 * sizeof(int));
+		++i;
+	}
 	if (argument_number(argc) == 1)
 		return(1);
 

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/09 18:04:19 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:28:16 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ struct s_proc
 {
 	pid_t	*pids;
 	int		*pipes[2];
-	int		fd;
+	int		fd[2];
+	int		cmd_nb;
 	char	*cmd;
 };
 

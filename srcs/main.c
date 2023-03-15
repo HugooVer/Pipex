@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/15 19:47:41 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/15 19:50:20 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	// printf("%i\n", argc);
 	cmd_nb = argc-1;
-	printf("%i\n", cmd_nb);
+	// printf("%i\n", cmd_nb);
 	pids = malloc((cmd_nb + 1)* sizeof(pid_t));
 	if (pids == NULL)
 		return(5);

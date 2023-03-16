@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/15 19:50:20 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:16:19 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[], char *envp[])
 	i = 0;
 	while(i <= cmd_nb - 1)
 	{
-		pipes[i] = malloc(3 * sizeof(int));
+		pipes[i] = malloc(2 * sizeof(int));
 		++i;
 	}
 	if (argument_number(argc) == 1)
@@ -49,10 +49,11 @@ int	main(int argc, char *argv[], char *envp[])
 		return (ft_printf("Env Error\n"), 2);
 
 	i = 0;
-	while (i <= (argc - 2))
+	while (i <= (argc - 3))
 	{
 		if (pipe(pipes[i]) == -1)
 			return (3);
+		// printf("Test %i\n", i);
 		++i;
 	}
 	i = 0;

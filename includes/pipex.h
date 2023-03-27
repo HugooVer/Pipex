@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/13 20:28:16 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/27 19:28:11 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_proc	t_proc;
 struct s_proc
 {
 	pid_t	*pids;
-	int		*pipes[2];
+	int		**pipes;
 	int		fd[2];
 	int		cmd_nb;
 	char	*cmd;

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/31 18:52:13 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:23:44 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ int	main(int argc, char *argv[], char *envp[])
 				return (printf("Path for command not found == %i\n", i), 5);
 			if (i == 0)
 			{
-				printf("---------i == %i %s-------\n", i, proc.cmd);
+				// printf("---------i == %i %s-------\n", i, proc.cmd);
 				proc.fd = open(proc.infile, O_RDONLY, 0774);
 				dup2(proc.fd, STDIN_FILENO);
 				dup2(proc.pipes[i][WRITE_END], STDOUT_FILENO);
 			}
 			else if (i == (proc.cmd_nb - 1))
 			{
-				printf("--------i == end %i %s-------\n", i, proc.cmd);
+				// printf("--------i == end %i %s-------\n", i, proc.cmd);
 				proc.fd = open(proc.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0774);
 				// printf("==========%s=%d==========\n", proc.outfile, proc.fd);
 				dup2(proc.fd, STDOUT_FILENO);
@@ -103,13 +103,12 @@ int	main(int argc, char *argv[], char *envp[])
 			}
 			else
 			{
-				printf("----------rest %i %s---------\n", i, proc.cmd);
+				// printf("----------rest %i %s---------\n", i, proc.cmd);
 				dup2(proc.pipes[i][WRITE_END], STDOUT_FILENO);
 				dup2(proc.pipes[i - 1][READ_END], STDIN_FILENO);
 			}
 			if (execve(proc.cmd, pars, envp) == -1)
 				perror("execve");
-			// printf("test\n");
 			close(proc.pipes[i][READ_END]);
 			close(proc.pipes[i + 1][WRITE_END]);
 

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/30 20:12:20 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:45:56 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return(1);
 
 	// printf("%i\n", argc);
-	proc.cmd_nb = argc - 2;
+	proc.cmd_nb = argc - 3;
 	// printf("%i\n", proc.cmd_nb);
 	proc.pids = malloc((proc.cmd_nb + 1)* sizeof(pid_t));
 	if (proc.pids == NULL)
@@ -60,7 +60,7 @@ int	main(int argc, char *argv[], char *envp[])
 	proc.infile = (argv[1]);
 		
 	i = 0;
-	while (i < (proc.cmd_nb - 1))
+	while (i < (proc.cmd_nb))
 	{
 		proc.pids[i] = fork();
 		if (proc.pids[i] == -1)
@@ -72,7 +72,7 @@ int	main(int argc, char *argv[], char *envp[])
 		if (proc.pids[i] == 0)
 		{
 			j = 0;
-			while (j < (proc.cmd_nb - 1))
+			while (j <= (proc.cmd_nb - 1))
 			{
 				if (j != i)
 					close(proc.pipes[j][WRITE_END]);
@@ -86,30 +86,33 @@ int	main(int argc, char *argv[], char *envp[])
 				// printf("-------------%s-------------------\n", *(argv + 1 + i));
 			if (proc.cmd == NULL)
 				return (ft_printf("Path for command not found == %i\n", i), 5);
-			if (i == 0)
+			if (i == 1)
 			{
-				// printf("---------i == 0-%s-------\n", proc.cmd);
-				proc.fd = open(proc.infile, O_RDONLY, 774);
+				printf("---------i == %i %s-------\n", i, proc.cmd);
+				proc.fd = open(proc.infile, O_RDONLY, 0774);
 				dup2(proc.fd, STDIN_FILENO);
-				dup2(proc.pipes[i + 1][WRITE_END], STDOUT_FILENO);
+				dup2(proc.pipes[i][WRITE_END], STDOUT_FILENO);
 			}
 			else if (i == (proc.cmd_nb - 1))
 			{
-				// printf("--------i == end-%s-------\n", proc.cmd);
-				proc.fd = open(proc.outfile, O_WRONLY | O_CREAT | O_TRUNC, 774);
+				printf("--------i == end %i %s-------\n", i, proc.cmd);
+				proc.fd = open(proc.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0774);
+				// printf("==========%s=%d==========\n", proc.outfile, proc.fd);
 				dup2(proc.fd, STDOUT_FILENO);
 				dup2(proc.pipes[i - 1][READ_END], STDIN_FILENO);
 			}
 			else
 			{
-				// printf("----------rest-%s---------\n", proc.cmd);
+				printf("----------rest %i %s---------\n", i, proc.cmd);
 				dup2(proc.pipes[i][WRITE_END], STDOUT_FILENO);
 				dup2(proc.pipes[i - 1][READ_END], STDIN_FILENO);
 			}
-				if (execve(proc.cmd, pars, envp) == -1)
-					perror("execve");
+			if (execve(proc.cmd, pars, envp) == -1)
+				perror("execve");
+			// printf("test\n");
 			close(proc.pipes[i][READ_END]);
 			close(proc.pipes[i + 1][WRITE_END]);
+
 			if (i == 0 || i == (proc.cmd_nb - 1))
 				close(proc.fd);
 			

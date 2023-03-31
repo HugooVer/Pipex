@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/31 18:45:56 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:52:13 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	main(int argc, char *argv[], char *envp[])
 				// printf("-------------%i-------------------\n", i);
 				// printf("-------------%s-------------------\n", *(argv + 1 + i));
 			if (proc.cmd == NULL)
-				return (ft_printf("Path for command not found == %i\n", i), 5);
-			if (i == 1)
+				return (printf("Path for command not found == %i\n", i), 5);
+			if (i == 0)
 			{
 				printf("---------i == %i %s-------\n", i, proc.cmd);
 				proc.fd = open(proc.infile, O_RDONLY, 0774);

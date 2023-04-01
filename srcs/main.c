@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/31 19:23:44 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:36:33 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,14 @@ int	main(int argc, char *argv[], char *envp[])
 				dup2(proc.pipes[i][WRITE_END], STDOUT_FILENO);
 				dup2(proc.pipes[i - 1][READ_END], STDIN_FILENO);
 			}
-			if (execve(proc.cmd, pars, envp) == -1)
-				perror("execve");
 			close(proc.pipes[i][READ_END]);
-			close(proc.pipes[i + 1][WRITE_END]);
-
+			close(proc.pipes[i][WRITE_END]);
+			
 			if (i == 0 || i == (proc.cmd_nb - 1))
 				close(proc.fd);
-			
-			return (0);
+
+			if (execve(proc.cmd, pars, envp) == -1)
+				perror("execve");
 		}
 		++i;
 	}

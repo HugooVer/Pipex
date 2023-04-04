@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/03/29 18:22:55 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/04 23:51:00 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ struct s_proc
 char	*access_check(char *path, char *cmd, int amode);
 char	*envp_finder(char **envp, char *flag);
 int		argument_number(int argc);
+int		dup22(int fd1, int fdd1, int fd2, int fdd2);
 
 
 #endif

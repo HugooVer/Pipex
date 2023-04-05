@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/04 23:50:16 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:31:07 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int	main(int argc, char *argv[], char *envp[])
 	proc.pids = malloc((proc.cmd_nb + 1)* sizeof(pid_t));
 	if (proc.pids == NULL)
 		return(5);
+
 	proc.pipes = malloc(proc.cmd_nb * sizeof(int *));
 	if (proc.pipes == NULL)
 		return(6);
+
 	i = 0;
 	while(i <= proc.cmd_nb - 1)
 	{
@@ -84,16 +86,9 @@ int	main(int argc, char *argv[], char *envp[])
 				return (printf("Path for command not found == %i\n", i), 5);
 
 			if (i == 0)
-			{
-
-				proc.fd = open(proc.infile, O_RDONLY, 0774);
-				dup22(STDIN_FILENO, proc.fd, STDOUT_FILENO, proc.pipes[i][WRITE_END]);
-			}
+				dup22(STDIN_FILENO, open(proc.infile, O_RDONLY, 0774), STDOUT_FILENO, proc.pipes[i][WRITE_END]);
 			else if (i == (proc.cmd_nb - 1))
-			{
-				proc.fd = open(proc.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0774);
-				dup22(STDOUT_FILENO, proc.fd, STDIN_FILENO, proc.pipes[i - 1][READ_END]);
-			}
+				dup22(STDOUT_FILENO, open(proc.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0774), STDIN_FILENO, proc.pipes[i - 1][READ_END]);
 			else
 				dup22(STDOUT_FILENO, proc.pipes[i][WRITE_END], STDIN_FILENO, proc.pipes[i - 1][READ_END]);
 
@@ -103,15 +98,10 @@ int	main(int argc, char *argv[], char *envp[])
 		++i;
 	}
 	i = 0;
-	while (i < (proc.cmd_nb - 1))
+	while (i < (proc.cmd_nb))
 	{
 		close(proc.pipes[i][READ_END]);
 		close(proc.pipes[i][WRITE_END]);
-		++i;
-	}
-	i = 0;
-	while (i < (proc.cmd_nb))
-	{
 		wait(NULL);
 		++i;
 	}

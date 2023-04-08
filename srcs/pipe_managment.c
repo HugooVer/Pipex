@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:10 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/08 16:56:59 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:06:17 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	dup2colose(int fd1, int fdd1, int fd2, int fdd2)
 	close (fdd1);
 	dup2 (fdd2, fd2);
 	close (fdd2);
-	return (1);
+	return (0);
 }
 
 int	close_all_pipes(t_proc *proc)

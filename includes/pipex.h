@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/05 16:31:15 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/08 16:57:46 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # include <sys/wait.h>
 
-
 typedef struct s_proc	t_proc;
 
 struct s_proc
@@ -30,16 +29,41 @@ struct s_proc
 	pid_t	*pids;
 	int		**pipes;
 	int		cmd_nb;
+	int		child;
 	char	*cmd;
 	char	*infile;
 	char	*outfile;
 };
 
+typedef struct s_path	t_path;
+
+struct s_path
+{
+	char	*path;
+	char	**pars;
+};
+
+typedef struct s_arg	t_arg;
+
+struct s_arg
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+};
 
 char	*access_check(char *path, char *cmd, int amode);
 char	*envp_finder(char **envp, char *flag);
 int		argument_number(int argc);
-int		dup22(int fd1, int fdd1, int fd2, int fdd2);
-
+int		dup2colose(int fd1, int fdd1, int fd2, int fdd2);
+int		pipe_creation(t_proc *proc);
+int		pipe_initialisation(t_proc *proc);
+int		keeping_used_pipes(t_proc *proc);
+int		data_preset(t_proc *proc, t_path *path, t_arg *arg);
+int		child_management(t_proc *proc, t_path *path, t_arg *arg);
+int		arg_to_t_arg(int argc, char **argv, char **envp, t_arg *arg);
+int		child_position_check(t_proc *proc);
+int		wait_fo_childs(t_proc *proc);
+int		close_all_pipes(t_proc *proc);
 
 #endif

@@ -9,7 +9,6 @@ SRCS += main.c
 SRCS += access_check.c
 SRCS += envp_finder.c
 SRCS += arguments_check.c
-SRCS += duplication.c
 SRCS += pipe_managment.c
 SRCS += child_management.c
 SRCS += data_set.c

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:51:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/11 00:40:16 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:41:10 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg)
 			close_all_pipes(proc);
 			execve(cmd_path, path->pars, arg->envp);
 			if (ft_strchr(cmd_path, '/') != NULL)
-				dprintf(2, "pipex: %s: No such file or directory\n", *path->pars);
+				dprintf(2, "pipex: %s: No such file or directory\n",
+					*path->pars);
 			else
 				dprintf(2, "%s: command not found\n", *path->pars);
 			exit (EXIT_FAILURE);

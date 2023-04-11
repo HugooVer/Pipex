@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/11 16:39:24 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:41:49 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ int	free_all_data(t_proc *proc)
 		++i;
 	}
 	free(proc->pipes);
-	return(0);
+	return (0);
 }

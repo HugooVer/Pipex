@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:51:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/11 00:41:10 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:38:45 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg)
 					*path->pars);
 			else
 				dprintf(2, "%s: command not found\n", *path->pars);
+			free_all_data(proc);
 			exit (EXIT_FAILURE);
 		}
 	++proc->child;
@@ -65,5 +66,6 @@ int	wait_for_childs(t_proc *proc)
 		wait(NULL);
 		++i;
 	}
+	free_all_data(proc);
 	return (0);
 }

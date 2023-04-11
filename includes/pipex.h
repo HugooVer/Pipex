@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/09 23:18:32 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:36:30 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int		arg_to_t_arg(int argc, char **argv, char **envp, t_arg *arg);
 int		child_position_check(t_proc *proc);
 int		wait_for_childs(t_proc *proc);
 int		close_all_pipes(t_proc *proc);
+int		free_all_data(t_proc *proc);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/08 16:50:27 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:39:24 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg)
 	proc->infile = (arg->argv[1]);
 	proc->child = 0;
 	return (0);
+}
+
+int	free_all_data(t_proc *proc)
+{
+	int	i;
+
+	i = 0;
+	free(proc->pids);
+	while (i <= proc->cmd_nb - 1)
+	{
+		free(proc->pipes[i]);
+		++i;
+	}
+	free(proc->pipes);
+	return(0);
 }

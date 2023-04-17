@@ -2,7 +2,8 @@ pipex
 infile
 outfile
 .vscode
-test.test
+000
+
 # Prerequisites
 *.d
 

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   access_check.c                                     :+:      :+:    :+:   */
+/*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 15:29:57 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/21 18:03:22 by hvercell         ###   ########.fr       */
+/*   Created: 2023/04/21 18:44:44 by hvercell          #+#    #+#             */
+/*   Updated: 2023/04/21 19:21:00 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*access_check(char *path, char *cmd, int amode)
+int	permission_error(t_proc *proc)
 {
-	char	**one_path;
-
-	one_path = ft_split(path, ':');
-	if (ft_strchr(cmd, '/') != NULL)
-		return (cmd);
-	while (*one_path != (NULL))
+	if (proc->fdin == -1)
 	{
-		if (access(ft_strjoin(ft_strjoin(*one_path, "/"), cmd), amode) == 0)
-			return (ft_strjoin(ft_strjoin(*one_path, "/"), cmd));
-		++one_path;
+		dprintf(2, "pipex: %s: Permission denied\n", proc->infile);
+		exit (EXIT_FAILURE);
 	}
-	return (cmd);
+	else if (proc->fdout == -1)
+	{
+		dprintf(2, "pipex: %s: Permission denied\n", proc->outfile);
+		exit (EXIT_FAILURE);
+	}
+	return (0);
 }
 
-// missing free()
+int	errno_error(t_proc *proc, t_path *path)
+{
+	dprintf(2, "pipex: %s: %s\n", strerror(errno), *path->pars);
+	free_all_data(proc);
+	exit (EXIT_FAILURE);
+}

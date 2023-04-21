@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/11 16:36:30 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:21:01 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_printf.h"
 
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_proc	t_proc;
 
@@ -30,6 +31,8 @@ struct s_proc
 	int		**pipes;
 	int		cmd_nb;
 	int		child;
+	int		fdin;
+	int		fdout;
 	char	*cmd;
 	char	*infile;
 	char	*outfile;
@@ -65,5 +68,7 @@ int		child_position_check(t_proc *proc);
 int		wait_for_childs(t_proc *proc);
 int		close_all_pipes(t_proc *proc);
 int		free_all_data(t_proc *proc);
+int		permission_error(t_proc *proc);
+int		errno_error(t_proc *proc, t_path *path);
 
 #endif

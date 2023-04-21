@@ -13,6 +13,7 @@ SRCS += pipe_managment.c
 SRCS += child_management.c
 SRCS += data_set.c
 SRCS += here_doc_management.c
+SRCS += error_management.c
 
 SRCS_PATH = srcs/
 

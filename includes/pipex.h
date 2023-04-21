@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/21 19:21:01 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/21 22:49:36 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ int		close_all_pipes(t_proc *proc);
 int		free_all_data(t_proc *proc);
 int		permission_error(t_proc *proc);
 int		errno_error(t_proc *proc, t_path *path);
+
+int		yolo(void);
 
 #endif

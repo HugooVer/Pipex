@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/22 18:19:28 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:33:27 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)argc;
 	(void)envp;
-	random_file_generator();
+	printf("%s\n", random_file_generator());
 	// arg_to_t_arg(argc, argv, envp, &arg);
 	// data_preset(&proc, &path, &arg);
 	// child_management(&proc, &path, &arg);

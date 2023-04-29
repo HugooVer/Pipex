@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/22 22:18:13 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:43:23 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,14 @@ char	*ft_strjoin_char(char const *s1, char s2)
 	return (ret);
 }
 
-struct s_xorshift64_state {
-	uint64_t	a;
-};
-
-uint64_t	xorshift64(struct s_xorshift64_state *state)
+static unsigned int	backup_random(void)
 {
-	uint64_t	x;
+	static unsigned int	x = 42;
 
-	x = state->a;
 	x ^= x << 13;
-	x ^= x >> 7;
-	x ^= x << 17;
-	return (state->a = x);
+	x ^= x >> 17;
+	x ^= x << 5;
+	return (x);
 }
 
 char	*random_file_generator(void)
@@ -57,19 +52,12 @@ char	*random_file_generator(void)
 	unsigned char				buffer[8];
 	int							fd;
 	char						*ret;
-	struct s_xorshift64_state	state;
-	char						*tp = "ok";
 
-	fd = -1;
-	// fd = open("/dev/urandom", O_RDONLY);
+	fd = open("/dev/urandom", O_RDONLY);
 	if (fd < 0)
-		// fd = open("/dev/random", O_RDONLY);
+		fd = open("/dev/random", O_RDONLY);
 	if (fd < 0)
-	{
-			state.a = 1; //to get a seed use "date +%s%N | cut -b1-13" or just "date +%s%N" can be a good solution
-		printf("%lu", xorshift64(&state));
-		return (tp);
-	}
+		return (ft_itoa(backup_random()));
 	read(fd, buffer, 8);
 	close(fd);
 	i = 0;
@@ -78,6 +66,5 @@ char	*random_file_generator(void)
 		ret = ft_strjoin_char(ret, buffer[i]);
 		++i;
 	}
-	printf("%s", ret);
 	return (ret);
 }

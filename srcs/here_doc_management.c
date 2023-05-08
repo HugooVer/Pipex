@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/29 18:43:23 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:32:14 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ char	*random_file_generator(void)
 		ret = ft_strjoin_char(ret, buffer[i]);
 		++i;
 	}
-	return (ret);
+	return (ft_itoa(ret));
 }

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/22 18:19:22 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:58:28 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ struct s_arg
 
 char	*access_check(char *path, char *cmd, int amode);
 char	*envp_finder(char **envp, char *flag);
-int		argument_number(int argc);
+int		argument_number(t_arg *arg, int nb);
 int		dup2close(int fd1, int fdd1, int fd2, int fdd2);
 int		pipe_creation(t_proc *proc);
 int		pipe_initialisation(t_proc *proc);
@@ -72,5 +72,6 @@ int		permission_error(t_proc *proc);
 int		errno_error(t_proc *proc, t_path *path);
 
 char	*random_file_generator(void);
+int		here_doc_check(t_arg *arg);
 
 #endif

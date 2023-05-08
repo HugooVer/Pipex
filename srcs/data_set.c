@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/11 16:41:49 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:00:24 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	arg_to_t_arg(int argc, char **argv, char **envp, t_arg *arg)
 
 int	data_preset(t_proc *proc, t_path *path, t_arg *arg)
 {
-	if (argument_number(arg->argc) == 1)
+	if (argument_number(arg, 4) == 1)
 		return (1);
 	proc->cmd_nb = arg->argc - 3;
 	proc->pids = malloc((proc->cmd_nb + 1) * sizeof(pid_t));

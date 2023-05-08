@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/08 15:32:14 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:04:33 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ char	*random_file_generator(void)
 		ret = ft_strjoin_char(ret, buffer[i]);
 		++i;
 	}
-	return (ft_itoa(ret));
+	return (ret);
 }
+
+// open(proc->outfile, O_WRONLY | O_CREAT, 0774);

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:29:57 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/21 18:03:22 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:06:27 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,7 @@ char	*access_check(char *path, char *cmd, int amode)
 }
 
 // missing free()
+int	existing_file(char *file_name, int amode)
+{
+	return (access(file_name, amode));
+}

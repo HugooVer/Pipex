@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/11 15:06:35 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:26:39 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,37 +36,34 @@ char	*ft_strjoin_char(char const *s1, char s2)
 	return (ret);
 }
 
-static unsigned int	backup_random(void)
+static unsigned long	backup_random(void)
 {
-	static unsigned int	x = 42;
+	static unsigned long	x = 42;
 
 	x ^= x << 13;
-	x ^= x >> 17;
-	x ^= x << 5;
+	x ^= x >> 7;
+	x ^= x << 17;
 	return (x);
 }
 
 char	*random_file_generator(void)
 {
-	int							i;
 	unsigned char				buffer[8];
 	int							fd;
-	char						*ret;
+	unsigned long				n;
 
 	fd = open("/dev/urandom", O_RDONLY);
 	if (fd < 0)
 		fd = open("/dev/random", O_RDONLY);
 	if (fd < 0)
-		return (ft_itoa(backup_random()));
-	read(fd, buffer, 8);
-	close(fd);
-	i = 0;
-	while (i < 8)
+		n = backup_random();
+	else
 	{
-		ret = ft_strjoin_char(ret, buffer[i]);
-		++i;
+		read(fd, buffer, 8);
+		close(fd);
+		memcpy(&n, buffer, 8);
 	}
-	return (ret);
+	return (ft_strjoin("/tmp/heredoc_", ft_itoa(n)));
 }
 
 int	here_file_generation(t_here *here)

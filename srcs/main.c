@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/11 15:21:42 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:40:47 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	main(int argc, char **argv, char **envp)
 	data_preset(&proc, &path, &arg, &here);
 	child_management(&proc, &path, &arg, &here);
 	close_all_pipes(&proc);
-	wait_for_childs(&proc);
+	wait_for_childs(&proc, &here);
 	return (0);
 }

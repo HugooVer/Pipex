@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:01:01 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/09 19:18:24 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:46:41 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,4 @@ int	here_doc_check(t_arg *arg, t_here *here)
 	if (ft_strncmp(arg->argv[1], "here_doc", ft_strlen(arg->argv[1])) == 0)
 		return (here->here = 1, here->limiter = arg->argv[2], 1);
 	return (here->here = 0, 0);
-
 }
-

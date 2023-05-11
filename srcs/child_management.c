@@ -6,13 +6,13 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:51:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/21 19:22:25 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:05:36 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	child_management(t_proc *proc, t_path *path, t_arg *arg)
+int	child_management(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 {
 	char	*cmd_path;
 
@@ -23,7 +23,7 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg)
 			return (4);
 		if (proc->pids[proc->child] == 0)
 		{
-			path->pars = ft_split(*(arg->argv + 2 + proc->child), ' ');
+			path->pars = ft_split(*(arg->argv + 2 + proc->child + here->here), ' ');
 			cmd_path = access_check(path->path, *path->pars, R_OK);
 			child_position_check(proc);
 			close_all_pipes(proc);

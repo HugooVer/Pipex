@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/09 19:29:46 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:21:42 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	main(int argc, char **argv, char **envp)
 	here_doc_check(&arg, &here);
 	if (here.here == 1)
 	{
-		here.fd = here_file_generation();
+		here.fd = here_file_generation(&here);
 		stdin_to_here_file(&here);
 	}
 	data_preset(&proc, &path, &arg, &here);
-	child_management(&proc, &path, &arg);
+	child_management(&proc, &path, &arg, &here);
 	close_all_pipes(&proc);
 	wait_for_childs(&proc);
 	return (0);

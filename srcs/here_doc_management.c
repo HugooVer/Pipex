@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/09 19:30:56 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:06:35 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ char	*random_file_generator(void)
 	return (ret);
 }
 
-int	here_file_generation(void)
+int	here_file_generation(t_here *here)
 {
-	char	*here_file = NULL;
-
-	while (existing_file(here_file, F_OK) == -1)
-		here_file = random_file_generator();
-	return (open(here_file, O_WRONLY | O_CREAT, 0774));
+	here->file_name = random_file_generator();
+	while (existing_file(here->file_name, F_OK) == 0)
+		here->file_name = random_file_generator();
+	return (open(here->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0774));
 }
 
 int	stdin_to_here_file(t_here *here)
@@ -83,7 +82,7 @@ int	stdin_to_here_file(t_here *here)
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	while (strncmp(here->limiter, line, ft_strlen(here->limiter)))
+	while (strncmp(here->limiter, line, ft_strlen(here->limiter)) != 0)
 	{
 		write(here->fd, line, ft_strlen(line));
 		line = get_next_line(STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/09 19:15:38 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:57:36 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 	if (here->here == 0)
 		proc->infile = (arg->argv[1]);
 	else
-		proc->infile = (here->file_name);
+		proc->infile = ft_strdup(here->file_name);
 	proc->child = 0;
 	return (0);
 }

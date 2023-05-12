@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:51:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/11 17:41:39 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:01:34 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 			cmd_path = access_check(path->path, *path->pars, R_OK);
 			child_position_check(proc, here);
 			close_all_pipes(proc);
-			permission_error(proc);
+			permission_error(proc, here);
 			execve(cmd_path, path->pars, arg->envp);
+			free(cmd_path);
 			errno_error(proc, path, here);
 		}
 	++proc->child;
@@ -57,7 +58,7 @@ int	child_position_check(t_proc *proc, t_here *here)
 	return (0);
 }
 
-int	wait_for_childs(t_proc *proc, t_here *here)
+int	wait_for_childs(t_proc *proc, t_here *here, t_path *path)
 {
 	int	i;
 
@@ -67,6 +68,6 @@ int	wait_for_childs(t_proc *proc, t_here *here)
 		wait(NULL);
 		++i;
 	}
-	free_all_data(proc, here);
+	free_all_data(proc, here, path);
 	return (0);
 }

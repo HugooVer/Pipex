@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/11 18:33:07 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:04:58 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 	if (proc->pipes == NULL)
 		return (6);
 	pipe_creation(proc);
-	path->path = envp_finder(arg->envp, "PATH=");
+	envp_finder(arg->envp, "PATH=", path);
 	if (path->path == NULL)
 		return (ft_printf("Env Error\n"), 2);
 	pipe_initialisation(proc);
@@ -45,7 +45,7 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 	return (0);
 }
 
-int	free_all_data(t_proc *proc, t_here *here)
+int	free_all_data(t_proc *proc, t_here *here, t_path *path)
 {
 	int	i;
 
@@ -57,7 +57,12 @@ int	free_all_data(t_proc *proc, t_here *here)
 		++i;
 	}
 	free(proc->pipes);
-	unlink(here->file_name);
-	free(here->file_name);
+	free(proc->infile);
+	free(path->path);
+	if (here->here == 1)
+	{
+		unlink(here->file_name);
+		free(here->file_name);
+	}
 	return (0);
 }

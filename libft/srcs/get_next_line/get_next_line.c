@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:38:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/10 19:05:13 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:16:22 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 void	ft_append_rest_to_line(char **line, char *rest, char *buf)
 {
-	*line = ft_strnjoin(*line, rest, ft_strlen(rest) + 1);
+	*line = ft_strnjoinf1(*line, rest, ft_strlen(rest) + 1);
 	ft_memset(rest, '\0', BUFFER_SIZE + 1);
 	ft_memset(buf, '\0', BUFFER_SIZE + 1);
 }
 
 void	ft_extract_line_from_rest(char **line, char *rest, ssize_t rest_s)
 {
-	*line = ft_strnjoin(*line, rest, rest_s + 1);
+	*line = ft_strnjoinf1(*line, rest, rest_s + 1);
 	ft_strlcpy(rest, rest + rest_s + 1, ft_strlen(rest + rest_s) + 1);
 }
 
@@ -40,13 +40,13 @@ void	ft_append_buf_to_line(char *buf, char **line, char *rest)
 
 	if (ft_memchri(buf, '\n') == -1)
 	{
-		*line = ft_strnjoin(*line, buf, ft_strlen(buf) + 1);
+		*line = ft_strnjoinf1(*line, buf, ft_strlen(buf) + 1);
 		ft_memset(buf, '\0', BUFFER_SIZE + 1);
 	}
 	else
 	{
 		buf_s = ft_memchri(buf, '\n');
-		*line = ft_strnjoin(*line, buf, buf_s + 1);
+		*line = ft_strnjoinf1(*line, buf, buf_s + 1);
 		ft_memset(rest, '\0', BUFFER_SIZE + 1);
 		ft_strlcpy(rest, buf + buf_s + 1, ft_strlen(buf + buf_s) + 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:26:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/02/09 17:02:49 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:13:18 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	ft_prints(char *s)
 	if (s == NULL)
 		return (ft_prints("(null)"));
 	len = ft_strlen(s) * sizeof(char);
-	write(1, s, len);
+	write(2, s, len);
 	return (len);
 }

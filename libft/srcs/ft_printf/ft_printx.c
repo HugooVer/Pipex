@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:06:11 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/28 18:54:50 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:13:18 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_put_hexx(size_t x)
 	if (x > 0)
 	{
 		ft_put_hexx(x / 16);
-		write(1, &str[x % 16], 1);
+		write(2, &str[x % 16], 1);
 	}
 }
 

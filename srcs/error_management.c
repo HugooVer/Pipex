@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:44:44 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/13 16:55:16 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:20:42 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	permission_error(t_proc *proc, t_here *here, t_path *path)
 
 	if (proc->child == 0 && proc->fdin == -1)
 	{
-		out = ft_strnjoinf1(ft_strnjoinf1("pipex: ", proc->infile,
+		out = ft_strnjoinf1(ft_strnjoin("pipex: ", proc->infile,
 					ft_strlen(proc->infile)), ": Permission denied\n", 20);
 		ft_printf("%s", out);
 		free(out);
@@ -28,7 +28,7 @@ int	permission_error(t_proc *proc, t_here *here, t_path *path)
 	else if (proc->child == (proc->cmd_nb - 1 - here->here)
 		&& proc->fdout == -1)
 	{
-		out = ft_strnjoinf1(ft_strnjoinf1("pipex: ", proc->outfile,
+		out = ft_strnjoinf1(ft_strnjoin("pipex: ", proc->outfile,
 					ft_strlen(proc->outfile)), ": Permission denied\n", 20);
 		ft_printf("%s", out);
 		free(out);

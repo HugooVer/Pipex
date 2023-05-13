@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:33:25 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/12 15:01:26 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:50:13 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		child_position_check(t_proc *proc, t_here *here);
 int		wait_for_childs(t_proc *proc, t_here *here, t_path *path);
 int		close_all_pipes(t_proc *proc);
 int		free_all_data(t_proc *proc, t_here *here, t_path *path);
-int		permission_error(t_proc *proc, t_here *here);
+int		permission_error(t_proc *proc, t_here *here, t_path *path);
 int		errno_error(t_proc *proc, t_path *path, t_here *here);
 
 char	*random_file_generator(void);

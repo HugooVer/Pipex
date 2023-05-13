@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:51:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/12 15:01:34 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:50:21 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 {
 	char	*cmd_path;
 
+	cmd_path = NULL;
 	while (proc->child < (proc->cmd_nb) - here->here)
 	{
 		proc->pids[proc->child] = fork();
@@ -28,10 +29,10 @@ int	child_management(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 			cmd_path = access_check(path->path, *path->pars, R_OK);
 			child_position_check(proc, here);
 			close_all_pipes(proc);
-			permission_error(proc, here);
+			permission_error(proc, here, path);
 			execve(cmd_path, path->pars, arg->envp);
-			free(cmd_path);
 			errno_error(proc, path, here);
+			exit (EXIT_FAILURE);
 		}
 	++proc->child;
 	}

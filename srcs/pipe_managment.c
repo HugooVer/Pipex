@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:10 by hvercell          #+#    #+#             */
-/*   Updated: 2023/04/09 23:26:44 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:01:49 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ int	pipe_initialisation(t_proc *proc)
 int	dup2close(int fd1, int fdd1, int fd2, int fdd2)
 {
 	dup2 (fdd1, fd1);
-	close (fdd1);
+	if (fdd1 != -1)
+		close (fdd1);
 	dup2 (fdd2, fd2);
-	close (fdd2);
+	if (fdd2 != -1)
+		close (fdd2);
 	return (0);
 }
 

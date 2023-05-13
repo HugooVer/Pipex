@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/12 18:04:58 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:41:29 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 	pipe_creation(proc);
 	envp_finder(arg->envp, "PATH=", path);
 	if (path->path == NULL)
-		return (ft_printf("Env Error\n"), 2);
+		return (write(2, "Env Error\n", 10), 2);
 	pipe_initialisation(proc);
 	proc->outfile = (arg->argv[arg->argc - 1]);
 	if (here->here == 0)
@@ -43,6 +43,22 @@ int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 		proc->infile = ft_strdup(here->file_name);
 	proc->child = 0;
 	return (0);
+}
+
+static void	*ft_free(char **ret)
+{
+	size_t	i;
+
+	i = 0;
+	if (ret == NULL)
+		return (NULL);
+	while (ret[i] != NULL)
+	{
+		free(ret[i]);
+		++i;
+	}
+	free(ret);
+	return (NULL);
 }
 
 int	free_all_data(t_proc *proc, t_here *here, t_path *path)
@@ -57,9 +73,10 @@ int	free_all_data(t_proc *proc, t_here *here, t_path *path)
 		++i;
 	}
 	free(proc->pipes);
-	free(proc->infile);
 	free(path->path);
-	if (here->here == 1)
+	if (path->pars)
+		ft_free(path->pars);
+	if (here->here == 1 && proc->child == 1)
 	{
 		unlink(here->file_name);
 		free(here->file_name);

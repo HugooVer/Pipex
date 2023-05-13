@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:01:01 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/13 16:56:13 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 20:13:38 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	argument_number(t_arg *arg, int nb)
 	if (arg->argc <= nb)
 	{
 		intt = ft_itoa(nb);
-		out = ft_strnjoinf1(ft_strnjoinf1("At least ", intt, ft_strlen(intt))
-				, " arguments\n", 11);
+		out = ft_strnjoinf1(ft_strnjoin("At least ", intt, ft_strlen(intt)),
+				" arguments\n", 11);
 		ft_printf("%s", out);
 		return (free(out), free(intt), 1);
 	}

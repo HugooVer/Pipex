@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/13 16:41:29 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/13 20:14:12 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	arg_to_t_arg(int argc, char **argv, char **envp, t_arg *arg)
 
 int	data_preset(t_proc *proc, t_path *path, t_arg *arg, t_here *here)
 {
-	if (argument_number(arg, 4) == 1)
-		return (1);
+	// if (argument_number(arg, 4 + here->here) == 1)
+	// 	return (1);
 	proc->cmd_nb = arg->argc - 3;
 	proc->pids = malloc((proc->cmd_nb + 1) * sizeof(pid_t));
 	if (proc->pids == NULL)
@@ -76,6 +76,7 @@ int	free_all_data(t_proc *proc, t_here *here, t_path *path)
 	free(path->path);
 	if (path->pars)
 		ft_free(path->pars);
+	free(proc->infile);
 	if (here->here == 1 && proc->child == 1)
 	{
 		unlink(here->file_name);

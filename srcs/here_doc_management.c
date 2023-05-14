@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/12 19:07:47 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:38:21 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*random_file_generator(void)
 	{
 		read(fd, buffer, 8);
 		close(fd);
-		memcpy(&n, buffer, 8);
+		ft_memcpy(&n, buffer, 8);
 	}
 	nn = ft_itoa(n);
 	return (ft_strnjoinf2("/tmp/heredoc_", nn, ft_strlen(nn)));
@@ -49,7 +49,7 @@ int	here_file_generation(t_here *here)
 	here->file_name = random_file_generator();
 	while (existing_file(here->file_name, F_OK) == 0)
 		here->file_name = random_file_generator();
-	return (open(here->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0774));
+	return (open(here->file_name, O_WRONLY | O_CREAT, 0774));
 }
 
 int	stdin_to_here_file(t_here *here)

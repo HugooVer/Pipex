@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:49:40 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/14 17:46:47 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:51:34 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	free_all_data(t_proc *proc, t_here *here, t_path *path)
 	if (here->here == 1)
 		free(proc->infile);
 	if (here->here == 1)
-	// if (here->here == 1 && proc->child == 1)
 	{
 		unlink(here->file_name);
 		free(here->file_name);

@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 19:30:39 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/14 17:38:21 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:44:43 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	stdin_to_here_file(t_here *here)
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
-	while (ft_strncmp(here->limiter, line, ft_strlen(here->limiter)) != 0)
+	while (ft_strlen(line) != (ft_strlen(here->limiter) + 1)
+		|| ft_strncmp(here->limiter, line, ft_strlen(here->limiter)) != 0)
 	{
 		write(here->fd, line, ft_strlen(line));
 		free(line);

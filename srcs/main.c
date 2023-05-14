@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:02:51 by hvercell          #+#    #+#             */
-/*   Updated: 2023/05/14 17:31:24 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:02:03 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv, char **envp)
 
 	path.pars = NULL;
 	arg_to_t_arg(argc, argv, envp, &arg);
+	if (argument_number(&arg, 4) == 1)
+		exit(EXIT_FAILURE);
 	here_doc_check(&arg, &here);
 	if (argument_number(&arg, 4 + here.here) == 1)
 		exit(EXIT_FAILURE);

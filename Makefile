@@ -32,9 +32,9 @@ vpath %.c ${SRCS_PATH}
 OBJS_PATH = objs
 OBJS = ${patsubst %.c, ${OBJS_PATH}/%.o, ${SRCS}}
 
-all: ${LIBFT} ${NAME}
+all: ${NAME}
 
-${NAME}: ${OBJS}
+${NAME}: ${LIBFT} ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} -o ${NAME} -I ${INCLUDE} ${LIBFT_INCUDE} ${LIBFT}
 
 ${LIBFT}:
